@@ -1,5 +1,6 @@
 {
   "name": "weather",
+  "homepage": "http://weather-eyar.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
