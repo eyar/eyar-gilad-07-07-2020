@@ -7,7 +7,8 @@ import { BrowserRouter, HashRouter, Switch, Route } from "react-router-dom";
 import {useAsyncState} from './redux/useAsyncState'
 import {Toast, ToastHeader} from 'reactstrap'
 import {dimissToastAction} from "./redux/asyncReducer";
-import {css} from 'emotion'
+import {css} from 'emotion';
+import './styles.scss';
 
 const App = () => {
   let stateEntries = Object.entries(useAsyncState());
