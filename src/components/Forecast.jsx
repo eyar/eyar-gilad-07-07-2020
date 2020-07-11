@@ -19,7 +19,7 @@ const Forecast = (props) => {
 
     return <>
         {isLoading && <div className='d-flex justify-content-between'><Spinner color="primary" /></div>}
-        <ul className='d-flex list-unstyled flex-wrap justify-content-between'>
+        <ul className='d-flex list-unstyled flex-wrap justify-content-center justify-content-md-between'>
             {payload?.DailyForecasts?.map((day,i)=><li key={i} className='flex-fill border border-dark rounded mx-2 mb-2 pb-2 text-center col-5 col-md-2'>
                 <div>{getWeekDay(day?.Date)}</div>
                 <img src={getImage(day?.Day?.Icon)} alt=""/>
