@@ -1,8 +1,7 @@
 {
   "name": "weather",
-  "homepage": "http://weather-eyar.herokuapp.com/",
+  "homepage": "https://weather-eyar.herokuapp.com/",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
