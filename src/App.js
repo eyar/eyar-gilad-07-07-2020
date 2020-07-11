@@ -26,6 +26,7 @@ const App = () => {
   `;
 
   const toastStyle = css`
+    width: 300px;
     @media (max-width:992px) {
         margin: 0 auto;
     }

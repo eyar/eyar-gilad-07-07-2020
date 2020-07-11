@@ -1,15 +1,12 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Autocomplete from 'react-autocomplete';
 import {useAsyncState} from '../redux/useAsyncState'
-import {getReal, getMock} from '../utils'
 
 const SearchBox = (props) => {
     const [value, setValue] = useState('');
     const [autocompleteData, setAutocompleteData] = useState([]);
 
-    const get = process.env.REACT_APP_MOCK==='true' ? getMock('Autocomplete') : getReal('locations/v1/cities/autocomplete', value);
-    const loader = useCallback(get, [value]);
-    const { payload, isLoading } = useAsyncState('Autocomplete', loader);
+    const { payload } = useAsyncState('Autocomplete', 'locations/v1/cities/autocomplete', value);
 
     useEffect(()=>{
         const data = payload && payload?.map((item, i)=>{

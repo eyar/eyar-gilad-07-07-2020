@@ -6,8 +6,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    ButtonToggle } from 'reactstrap';
+    NavLink } from 'reactstrap';
 
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);

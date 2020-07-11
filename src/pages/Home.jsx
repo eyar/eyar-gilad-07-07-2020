@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBox from '../components/SearchBox'
 import Top from '../components/Top'
 import Forecast from '../components/Forecast'
 import {useAsyncState} from '../redux/useAsyncState'
-import {getReal, getMock} from '../utils'
 
 const Home = (props) => {
      const [position, setPosition] = useState(false);
@@ -22,9 +21,7 @@ const Home = (props) => {
           position && setQuery(`${position.coords?.latitude},${position.coords?.longitude}`);
      },[position]);
 
-     const get = process.env.REACT_APP_MOCK==='true' ? getMock('Geoposition') : getReal('locations/v1/cities/geoposition/search',query);
-     const loader = useCallback(get, [query]);
-     const { payload, isLoading, loadError } = useAsyncState('Geoposition', loader);
+     const { payload } = useAsyncState('Geoposition', 'locations/v1/cities/geoposition/search', query);
      
      useEffect(()=>{
           city.name==='Tel Aviv' && payload && setCity({name: payload?.ParentCity?.EnglishName, key: payload?.ParentCity?.Key});

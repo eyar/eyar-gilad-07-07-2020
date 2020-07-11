@@ -1,16 +1,16 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {useAsyncState} from '../redux/useAsyncState'
 import {Spinner, NavLink } from 'reactstrap';
-import {getBatch, getMock, getImage} from '../utils'
+import { getImage } from '../utils'
 
 const ListItem = (props) => {
     const [data, setData] = useState();
-    const path = `currentconditions/v1/${props.city.key}`;
-    const get = process.env.REACT_APP_MOCK==='true' ? getMock('Current Weather', path) : getBatch(path);
-    const loader = useCallback(get, [path]);
-    const { payload, isLoading, loadError } = useAsyncState('Current Weather', loader);
+
+    let path = `currentconditions/v1/${props.city.key}`;
+    const { payload, isLoading } = useAsyncState('Current Weather', path, null, 'batch');
     
     useEffect(()=>{
+        path = path.split('/').join('-');
         payload && payload[path] && setData(payload[path]);
     },[payload])
     
