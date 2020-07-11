@@ -41,7 +41,7 @@ const Top = (props) => {
     const style = css`
         background: transparent;
         border: none;
-        font-size: 20px;
+        margin-right: 5px;
         :focus{
             background: transparent;
             box-shadow: none;
@@ -57,7 +57,10 @@ const Top = (props) => {
                 <div>{payload && payload[0]?.Temperature?.Imperial?.Value}&deg;F</div>
             </div>}
             <div>
-                <button onClick={toggleFavorites} className={`${style} btn`} >{favorite ? '❤️' : '🤍'}</button>
+                <button onClick={toggleFavorites} className={`${style} btn`} >
+                    <img src='1f90d.png' className={favorite && 'd-none'} alt='' width='30'/>
+                    <img src='2764.png' className={!favorite && 'd-none'} alt='' width='30'/>
+                </button>
                 <Button onClick={toggleFavorites} style={{marginRight: '8px'}}>Add to Favorites</Button>
             </div>
         </div>

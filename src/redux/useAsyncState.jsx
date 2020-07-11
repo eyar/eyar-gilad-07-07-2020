@@ -21,7 +21,7 @@ const getReal = (path, query, batch) => async () => {
 
 const getMock = (type, path, batch) => async () => {
   path = path && path.split('/').join('-');
-  let url = 'https://3000-d45f21aa-402a-4f1e-83ea-8e25c449039b.ws-eu01.gitpod.io';
+  let url = 'https://json-s.herokuapp.com';
   switch(type){
       case 'Geoposition':
           url = `${url}/geolocation`
