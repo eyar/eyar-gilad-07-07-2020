@@ -34,7 +34,7 @@ const Favorites = () => {
     },[window])
 
 
-    return <ul className='d-flex list-unstyled mt-5 flex-wrap justify-content-center'>
+    return <ul className='d-flex list-unstyled mt-5 flex-wrap justify-content-around'>
         {favorites.map((city,i)=><ListItem city={JSON.parse(city)} key={i}/>)}
     </ul>
 }

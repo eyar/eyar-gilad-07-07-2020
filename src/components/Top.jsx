@@ -47,6 +47,7 @@ const Top = (props) => {
             box-shadow: none;
         }
     `;
+
     return <>
         <div className='d-flex justify-content-between'>
             {isLoading && <div className='d-flex justify-content-center'><Spinner color="primary" /></div>}
@@ -57,7 +58,7 @@ const Top = (props) => {
             </div>}
             <div>
                 <button onClick={toggleFavorites} className={`${style} btn`} >{favorite ? '❤️' : '🤍'}</button>
-                <Button onClick={toggleFavorites} >Add to Favorites</Button>
+                <Button onClick={toggleFavorites} style={{marginRight: '8px'}}>Add to Favorites</Button>
             </div>
         </div>
         <h2 className='d-flex justify-content-center mb-4'>{payload && payload[0]?.WeatherText}</h2>
