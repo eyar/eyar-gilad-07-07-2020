@@ -21,22 +21,22 @@ const getReal = (path, query, batch) => async () => {
 
 const getMock = (type, path, batch) => async () => {
   path = path && path.split('/').join('-');
-  let url = '';
+  let url = 'https://3000-d45f21aa-402a-4f1e-83ea-8e25c449039b.ws-eu01.gitpod.io';
   switch(type){
       case 'Geoposition':
-          url = 'http://localhost:3004/geolocation'
+          url = `${url}/geolocation`
           break;
       case 'Autocomplete':
-          url = 'http://localhost:3004/autocomplete'
+          url = `${url}/autocomplete`
           break;
       case '5 Day Forecast':
-          url = 'http://localhost:3004/forecast'
+          url = `${url}/forecast`
           break;
       case 'Current Weather':
-          url = 'http://localhost:3004/weather'
+          url = `${url}/weather`
           break;
       default: 
-          url = `http://localhost:3004/${path}`;
+          url = `${url}/${path}`;
       break;
   }
   const apiData = await axios.get(url);
