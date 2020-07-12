@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import {useAsyncState} from '../redux/useAsyncState'
 import {Spinner, NavLink } from 'reactstrap';
-import { getImage } from '../utils'
+import { getImage, useLocalStorage } from '../utils'
 
 const ListItem = (props) => {
     const [data, setData] = useState();
@@ -27,12 +27,7 @@ const ListItem = (props) => {
 }
 
 const Favorites = () => {
-    const [favorites, setFavorites] = useState([]);
-
-    useEffect(()=>{
-        setFavorites(JSON.parse(window.localStorage.getItem('favorites')) || []);
-    },[window])
-
+    const [favorites, setFavorites] = useLocalStorage('favorites', []);
 
     return <ul className='d-flex list-unstyled mt-5 flex-wrap justify-content-around'>
         {favorites.map((city,i)=><ListItem city={JSON.parse(city)} key={i}/>)}

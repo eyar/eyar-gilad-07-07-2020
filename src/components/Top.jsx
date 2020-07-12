@@ -1,52 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import {useAsyncState} from '../redux/useAsyncState'
-import { getImage } from '../utils'
+import { getImage, useLocalStorage } from '../utils'
 import {Button, Spinner} from 'reactstrap'
-import {css} from 'emotion'
 
 const Top = (props) => {
     const [city, setCity] = useState(props.city);
+    const [favorites, setFavorites] = useLocalStorage('favorites', []);
     const [favorite, setFavorite] = useState(false);
     
     useEffect(()=>{
         props.city && setCity(props.city);
-        let favorites = JSON.parse(window.localStorage.getItem('favorites')) || [];
-        favorites = new Set(favorites);
+        setFavorites(favorites?.length ? favorites : []);
+        const favoritesSet =  new Set(favorites);
         const cityString = JSON.stringify(props.city);
-        setFavorite(favorites.has(cityString));
+        setFavorite(favoritesSet.has(cityString));
     },[props.city])
 
     const toggleFavorites = () => {
-        let favorites = JSON.parse(window.localStorage.getItem('favorites')) || [];
-        favorites = new Set(favorites);
+        const favoritesSet = new Set(favorites);
         const cityString = JSON.stringify(city);
-        if(favorites.has(cityString)){
+        if(favoritesSet.has(cityString)){
             setFavorite(false);
-            favorites.delete(cityString)
+            favoritesSet.delete(cityString)
         }
         else{
             setFavorite(true);
-            favorites.add(cityString);
+            favoritesSet.add(cityString);
         }
-        favorites = [...favorites.values()];
-        window.localStorage.setItem('favorites', JSON.stringify(favorites));
+        setFavorites([...favoritesSet.values()]);
     }
 
     const { payload, isLoading } = useAsyncState('Current Weather', `currentconditions/v1/${city.key}`);
-    
-    useEffect(()=>{
-        console.log(payload)
-    }, [payload]);
-
-    const style = css`
-        background: transparent;
-        border: none;
-        margin-right: 5px;
-        :focus{
-            background: transparent;
-            box-shadow: none;
-        }
-    `;
 
     return <>
         <div className='d-flex justify-content-between'>
@@ -57,7 +41,7 @@ const Top = (props) => {
                 <div>{payload && payload[0]?.Temperature?.Imperial?.Value}&deg;F</div>
             </div>}
             <div>
-                <button onClick={toggleFavorites} className={`${style} btn`} >
+                <button onClick={toggleFavorites} className='like btn' >
                     <img src='1f90d.png' className={favorite && 'd-none'} alt='' width='30'/>
                     <img src='2764.png' className={!favorite && 'd-none'} alt='' width='30'/>
                 </button>
