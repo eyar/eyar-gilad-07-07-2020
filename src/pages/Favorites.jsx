@@ -10,7 +10,6 @@ const ListItem = (props) => {
     const { payload, isLoading } = useAsyncState('Current Weather', path, null, 'batch');
     
     useEffect(()=>{
-        path = path.split('/').join('-');
         payload && payload[path] && setData(payload[path]);
     },[payload])
     
