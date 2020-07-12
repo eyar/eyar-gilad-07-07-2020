@@ -41,6 +41,7 @@ const getMock = (type, path, batch) => async () => {
   }
   const apiData = await axios.get(url);
   const obj = {};
+  path = path && path.split('-').join('/');
   obj[path] = apiData.data;
   return Promise.resolve({ data: batch ? obj : apiData.data });
 };
@@ -57,7 +58,7 @@ export const useAsyncState = (stateProperty, path, query, batch) => {
       );
     }
 
-    const get = 'dont'==='mock' ? getMock(stateProperty, path, batch) : getReal(path, query, batch);
+    const get = 'mock'==='mock' ? getMock(stateProperty, path, batch) : getReal(path, query, batch);
     const loader = useCallback(get,[query]);
 
     useEffect(() => {
