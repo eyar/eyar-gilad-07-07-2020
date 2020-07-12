@@ -8,7 +8,7 @@ import {
 import axios from "axios";
 
 const getReal = (path, query, batch) => async () => {
-  const apiData = await axios.get(`http://dataservice.accuweather.com/${path}`,{
+  const apiData = await axios.get(`https://dataservice.accuweather.com/${path}`,{
       params: {
           apikey: process.env.REACT_APP_ACCUWEATHER_KEY,
           q: query

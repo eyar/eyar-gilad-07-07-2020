@@ -27,7 +27,7 @@ body.dark-mode {
     background: transparent;
     border: none;
     margin-right: 5px;
-    :focus{
+    &:focus{
         background: transparent;
         box-shadow: none;
     }
